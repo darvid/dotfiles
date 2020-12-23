@@ -1,0 +1,41 @@
+[user]
+	name = David Gidwani
+	email = david.gidwani@gmail.com
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+  autocrlf = input
+  excludesfile = ~/.gitignore_global
+  filemode = false
+  trustctime = false
+[alias]
+	delete-the-fucking-tag = !sh -c 'git tag -d $@ && git push origin :refs/tags/$@' -
+	current-tag = describe --tags --abbrev=0
+	fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+	c = commit -m
+	st = status -s
+	sta = stash
+	a = add
+	ap = add --patch
+	pu = push
+	pl = pull
+	cl = clone
+	rba = rebase --abort
+	rbc = rebase --continue
+	sts = stash save
+	stp = stash pop
+	std = stash drop
+	stap = stash apply
+	smi = submodule init
+	smu = submodule update --init --recursive
+	po = push origin
+[advice]
+	statusHints = false
+[push]
+	default = current
+	followTags = true
+[rebase]
+	autosquash = true
+[mergetool]
+	keepBackup = false
+[pull]
+	ff = only

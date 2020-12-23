@@ -1,0 +1,4 @@
+# code: language=shellscript
+alias reload="source ~/.zshrc"
+alias _="sudo -E"
+alias rr="rm -rf"
