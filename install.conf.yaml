@@ -1,3 +1,5 @@
+- brewfile:
+    file: Brewfile
 - clean: ['~']
 - link:
     ~/.czrc: czrc
