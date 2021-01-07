@@ -1,5 +1,8 @@
 [[ -z "$TMUX" ]] && tmux
 
+grep -Eqi "(Microsoft|WSL)" /proc/version
+IS_WSL=$?
+
 keychain --nogui -q $HOME/.ssh/id_ed25519
 source $HOME/.keychain/$HOST-sh
 
@@ -40,6 +43,7 @@ zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions
 
+zinit snippet OMZP::aws
 zinit snippet OMZL::git.zsh
 zinit snippet OMZL::history.zsh
 zinit snippet OMZL::key-bindings.zsh
@@ -79,6 +83,9 @@ zinit light direnv/direnv
 zinit ice from"gh-r" as"program" mv"direnv* -> direnv"
 zinit light direnv/direnv
 
+zinit ice from"gh-r" as"program" mv"jq* -> jq"
+zinit light stedolan/jq
+
 zinit ice atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
     atinit'export PYENV_ROOT="$PWD"' atpull"%atclone" \
     as'command' pick'bin/pyenv' src"zpyenv.zsh" nocompile'!'
@@ -86,6 +93,10 @@ zinit light pyenv/pyenv
 
 zinit ice wait"2" lucid
 zinit load voronkovich/gitignore.plugin.zsh
+
+AWS_VAULT_PL_CHAR=
+zinit ice wait"2" lucid atload"GEOMETRY_RPROMPT+=(prompt_aws_vault_segment)"
+zinit load blimmer/zsh-aws-vault
 
 zinit ice as"program" pick"bin/git-dsf"
 zinit light zdharma/zsh-diff-so-fancy
@@ -129,9 +140,18 @@ bindkey "^[[B"    history-beginning-search-forward
 bindkey "^[[H"    beginning-of-line
 bindkey "^[[F"    end-of-line
 bindkey "^[[3~"   delete-char
+bindkey "^A"      beginning-of-line
+bindkey "^E"      end-of-line
 
 alias ls="exa -bh --icons --color=auto"
 alias grep="command grep --colour=auto --binary-files=without-match --directories=skip"
+
+if [[ $IS_WSL -eq 0 ]] && ! update-alternatives --query explorer >/dev/null 2>&1; then
+  sudo update-alternatives --install "$HOME/bin/explorer" "explorer" "$(which explorer.exe)" 1
+fi
+
+fpath+=( $HOME/functions )
+autoload -Uz $HOME/functions/*(.:t)
 
 source $HOME/.zsh_aliases
 source $HOME/.zsh_exports
