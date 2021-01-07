@@ -1,3 +1,7 @@
+- shell:
+    - [git submodule update --init --recursive, Updating submodules]
+    - [mkdir -p $HOME/functions, Creating functions directory]
+    - [mkdir -p $HOME/.ssh, Creating SSH directory]
 - brewfile:
     file: Brewfile
 - clean: ['~']
@@ -8,6 +12,6 @@
     ~/.tmux.conf: tmux.conf
     ~/.zsh_aliases: zsh_aliases
     ~/.zsh_exports: zsh_exports
-    ~/.zshrc: 
+    ~/.zshrc:
         force: true
         path: zshrc
