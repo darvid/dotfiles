@@ -2,7 +2,7 @@
 	name = David Gidwani
 	email = david.gidwani@gmail.com
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --diff-so-fancy
   autocrlf = input
   excludesfile = ~/.gitignore_global
   filemode = false
@@ -39,3 +39,10 @@
 	keepBackup = false
 [pull]
 	ff = only
+[delta]
+  plus-color = "#012800"
+  minus-color = "#340001"
+  line-numbers = true
+  syntax-theme = Dracula
+[interactive]
+  diffFilter = delta --color-only
