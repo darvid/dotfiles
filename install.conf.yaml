@@ -2,10 +2,12 @@
     - [git submodule update --init --recursive, Updating submodules]
     - [mkdir -p $HOME/functions, Creating functions directory]
     - [mkdir -p $HOME/.ssh, Creating SSH directory]
+    - [mkdir -p $HOME/bin, Creating bin directory]
 - brewfile:
     file: Brewfile
-- clean: ['~']
+- clean: ["~"]
 - link:
+    ~/.config/starship.toml: starship.toml
     ~/.czrc: czrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
@@ -15,3 +17,6 @@
     ~/.zshrc:
         force: true
         path: zshrc
+    ~/bin/np.sh: np.sh
+- shell:
+    - [chmod u+x ~/bin/np.sh]

@@ -12,17 +12,29 @@ fi
 
 source ~/.zinit/bin/zinit.zsh
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.serverless/bin:$PATH"
+# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
+export GOPATH="$HOME/go"
+export PATH="$GOPATH:$PATH"
 
 zinit light zinit-zsh/z-a-bin-gem-node
 
-GEOMETRY_COLOR_DIR=152
+# GEOMETRY_COLOR_DIR=152
+# GEOMETRY_STATUS_SYMBOL="異"
+# GEOMETRY_STATUS_SYMBOL_ERROR="ﮊ"
 
 # https://github.com/geometry-zsh/geometry/pull/304
-zinit ice wait"0" lucid ver"168f026" atload"geometry::prompt"
+# zinit ice wait"0" lucid ver"168f026" atload"geometry::prompt"
 # zinit light geometry-zsh/geometry
-zinit light jamescostian/geometry
+# zinit light jamescostian/geometry
+
+zinit ice from"gh-r" as"program" atload'eval "$(starship init zsh)"'
+zinit load starship/starship
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#555555,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -35,6 +47,9 @@ zinit load junegunn/fzf-bin
 zinit ice lucid wait'1'
 zinit light Aloxaf/fzf-tab
 
+zinit ice from"gh-r" as"program"
+zinit load open-pomodoro/openpomodoro-cli
+
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
@@ -44,6 +59,8 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-completions
 
 zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::helm
 zinit snippet OMZL::git.zsh
 zinit snippet OMZL::history.zsh
 zinit snippet OMZL::key-bindings.zsh
@@ -74,27 +91,49 @@ zinit load docker/compose
 zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa" bpick"*linux*"
 zinit light ogham/exa
 
+zinit ice from"gh-r" as"program" mv"minikube* -> minikube" bpick"*linux*"
+zinit load kubernetes/minikube
+
 zinit pick"misc/quitcd/quitcd.zsh" sbin make light-mode for jarun/nnn
 
 zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
     atpull'%atclone' src"zhook.zsh"
 zinit light direnv/direnv
 
-zinit ice from"gh-r" as"program" mv"direnv* -> direnv"
-zinit light direnv/direnv
-
 zinit ice from"gh-r" as"program" mv"jq* -> jq"
 zinit light stedolan/jq
+
+zinit ice from"gh-r" as"program" mv"multiwerf* -> multiwerf"
+zinit light werf/multiwerf
+. $(multiwerf use 1.1 stable --as-file)
 
 zinit ice atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
     atinit'export PYENV_ROOT="$PWD"' atpull"%atclone" \
     as'command' pick'bin/pyenv' src"zpyenv.zsh" nocompile'!'
 zinit light pyenv/pyenv
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/david/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/david/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/david/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/david/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# disable init of env "base"
+conda config --set auto_activate_base false
+
 zinit ice wait"2" lucid
 zinit load voronkovich/gitignore.plugin.zsh
 
-AWS_VAULT_PL_CHAR=
+AWS_VAULT_PL_CHAR=☁️
 zinit ice wait"2" lucid atload"GEOMETRY_RPROMPT+=(prompt_aws_vault_segment)"
 zinit load blimmer/zsh-aws-vault
 
@@ -134,6 +173,12 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
+zinit wait lucid for dim-an/cod
+
+if ! command -v jsonnetfmt &> /dev/null; then
+  go get github.com/google/go-jsonnet/cmd/jsonnetfmt
+fi
+
 bindkey -v
 bindkey "^[[A"    history-beginning-search-backward
 bindkey "^[[B"    history-beginning-search-forward
@@ -155,3 +200,7 @@ autoload -Uz $HOME/functions/*(.:t)
 
 source $HOME/.zsh_aliases
 source $HOME/.zsh_exports
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

@@ -1,0 +1,12 @@
+[character]
+success_symbol = "[ﲹ](bold green)"
+error_symbol = "[ﲹ](bold red)"
+
+[aws]
+symbol = " "
+
+[python]
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+format = "via [🤖 $version](bold green) "
