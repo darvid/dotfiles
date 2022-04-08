@@ -6,11 +6,13 @@ IS_WSL=$?
 keychain --nogui -q $HOME/.ssh/id_ed25519
 source $HOME/.keychain/$HOST-sh
 
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-  git clone https://github.com/zdharma/zinit.git ~/.zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+mkdir -p "$(dirname $ZINIT_HOME)"
+if [[ ! -f "$ZINIT_HOME/zinit.zsh" ]]; then
+  git clone https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
 fi
 
-source ~/.zinit/bin/zinit.zsh
+source "$ZINIT_HOME/zinit.zsh"
 
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
@@ -21,17 +23,6 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
 export GOPATH="$HOME/go"
 export PATH="$GOPATH:$PATH"
-
-zinit light zinit-zsh/z-a-bin-gem-node
-
-# GEOMETRY_COLOR_DIR=152
-# GEOMETRY_STATUS_SYMBOL="異"
-# GEOMETRY_STATUS_SYMBOL_ERROR="ﮊ"
-
-# https://github.com/geometry-zsh/geometry/pull/304
-# zinit ice wait"0" lucid ver"168f026" atload"geometry::prompt"
-# zinit light geometry-zsh/geometry
-# zinit light jamescostian/geometry
 
 zinit ice from"gh-r" as"program" atload'eval "$(starship init zsh)"'
 zinit load starship/starship
@@ -50,9 +41,11 @@ zinit light Aloxaf/fzf-tab
 zinit ice from"gh-r" as"program"
 zinit load open-pomodoro/openpomodoro-cli
 
+zinit light zdharma-continuum/zinit-annex-bin-gem-node
+zinit light zdharma-continuum/zinit-annex-readurl
 zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-      zdharma/fast-syntax-highlighting \
+  atload"zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
@@ -74,13 +67,10 @@ zinit light lukechilds/zsh-nvm
 
 zstyle ":history-search-multi-word" page-size "11"
 zinit ice wait"1" lucid
-zinit load zdharma/history-search-multi-word
+zinit load zdharma-continuum/history-search-multi-word
 
 zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
 zinit light sharkdp/fd
-
-zinit ice as"command" from"gh-r" pick"fpp"
-zinit light facebook/pathpicker
 
 zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
@@ -88,11 +78,20 @@ zinit light sharkdp/bat
 zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
 zinit load docker/compose
 
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa" bpick"*linux*"
+zinit ice lucid from"gh-r" as"program" mv"exa* -> exa" bpick"*linux*"
 zinit light ogham/exa
 
 zinit ice from"gh-r" as"program" mv"minikube* -> minikube" bpick"*linux*"
 zinit load kubernetes/minikube
+
+zinit ice from"gh-r" as"program" mv"terraformer-* -> terraformer" bpick"*aws*linux*"
+zinit load GoogleCloudPlatform/terraformer
+
+zinit id-as=terraform as='readurl|command' extract \
+    dlink0='/terraform/1.1.6/' \
+    dlink='/terraform/1.1.6/terraform_1.1.6_linux_amd64.zip' \
+    for \
+        http://releases.hashicorp.com/terraform/
 
 zinit pick"misc/quitcd/quitcd.zsh" sbin make light-mode for jarun/nnn
 
@@ -134,15 +133,11 @@ zinit ice wait"2" lucid
 zinit load voronkovich/gitignore.plugin.zsh
 
 AWS_VAULT_PL_CHAR=☁️
-zinit ice wait"2" lucid atload"GEOMETRY_RPROMPT+=(prompt_aws_vault_segment)"
+# zinit ice wait"2" lucid atload"GEOMETRY_RPROMPT+=(prompt_aws_vault_segment)"
 zinit load blimmer/zsh-aws-vault
 
 zinit ice as"program" pick"bin/git-dsf"
-zinit light zdharma/zsh-diff-so-fancy
-
-zinit ice wait"2" lucid as'command' pick'src/vramsteg' \
-    atclone'cmake .' atpull'%atclone' make  # use Turbo mode
-zinit light psprint/vramsteg-zsh
+zinit light zdharma-continuum/zsh-diff-so-fancy
 
 autoload up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search

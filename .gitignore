@@ -1,1 +1,4 @@
+*.tmp*
 Brewfile.lock.json
+package-lock.json
+package.json

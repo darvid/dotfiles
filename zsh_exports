@@ -9,5 +9,6 @@ export BROWSER=explorer
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
-export AWS_VAULT_BACKEND=file
+export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PL_BROWSER=google-chrome
+export GPG_TTY=$(tty)

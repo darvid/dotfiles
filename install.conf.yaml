@@ -7,6 +7,7 @@
     file: Brewfile
 - clean: ["~"]
 - link:
+    ~/.config/fish: .config/fish
     ~/.config/starship.toml: starship.toml
     ~/.czrc: czrc
     ~/.gitconfig: gitconfig
@@ -15,8 +16,14 @@
     ~/.zsh_aliases: zsh_aliases
     ~/.zsh_exports: zsh_exports
     ~/.zshrc:
-        force: true
-        path: zshrc
+      force: true
+      path: zshrc
     ~/bin/np.sh: np.sh
 - shell:
-    - [chmod u+x ~/bin/np.sh]
+    - [chmod u+x ~/bin/*.sh]
+    - [./scripts/install_cargo.sh, Installing Rust packages]
+    - [./scripts/install_node.sh, Installing NodeJS with nvm]
+    - [./scripts/install_lvim.sh, Installing LunarVim]
+    - [./scripts/install_gitalias.sh, Installing GitAlias]
+- link:
+    ~/.config/lvim/config.lua: .config/lvim/config.lua
