@@ -7,8 +7,10 @@
     file: Brewfile
 - clean: ["~"]
 - link:
+    ~/.config/black: .config/black
     ~/.config/fish: .config/fish
     ~/.config/starship.toml: starship.toml
+    ~/.config/zellij: .config/zellij
     ~/.czrc: czrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global

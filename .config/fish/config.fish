@@ -25,7 +25,7 @@ set -gx EDITOR code
 set -U tide_jobs_icon ⚙️
 set -U tide_kubectl_icon 🚢
 set -U tide_os_icon 🚀
-set -U tide_pwd_icon 📁
+set -U tide_pwd_icon 📂
 set -U tide_pwd_icon_home 🏠
 set -U tide_status_bg_color brblack
 set -U tide_status_icon_failure 💀
