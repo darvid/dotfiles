@@ -52,3 +52,5 @@ function tmux_directory_title
         tmux rename-window "$prefix$substring"
     end
 end
+
+thefuck --alias | source
