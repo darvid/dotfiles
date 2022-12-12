@@ -7,5 +7,3 @@ npm install -g \
   commitizen \
   cz-emoji \
   yarn
-
-npm audit fix --force

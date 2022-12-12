@@ -23,6 +23,7 @@
     ~/bin/np.sh: np.sh
 - shell:
     - [chmod u+x ~/bin/*.sh]
+    - [./scripts/install_base.sh, Installing pre-requisites]
     - [./scripts/install_cargo.sh, Installing Rust packages]
     - [./scripts/install_node.sh, Installing NodeJS with nvm]
     - [./scripts/install_lvim.sh, Installing LunarVim]
