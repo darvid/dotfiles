@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+. $(brew --prefix asdf)/libexec/asdf.sh
+asdf global rust latest
 # Cargo plugins
 cargo install \
   cargo-audit \
@@ -29,5 +31,3 @@ cargo install \
 cargo install \
   diskus \
   bottom
-
-cargo install --url https://github.com/google/git-tree

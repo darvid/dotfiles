@@ -1,0 +1,24 @@
+- shell:
+    - description: Updating system...
+      command: |
+        if [ $(uname) == "Linux" ]
+        then
+          apt -y update
+          apt -y install software-properties-common
+          apt-add-repository ppa:fish-shell/release-3 -y
+          apt -y update && apt -y upgrade
+        fi
+      stdout: true
+      stderr: true
+
+- shell:
+    - ["git submodule update --init --recursive", "Installing submodules"]
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - mkdir -p ~/bin
+    - mkdir -p ~/functions
+
+- clean:
+    - '~'
+    - '~/.config'
+    - '~/.local/bin'
+    - '/usr/local/bin'

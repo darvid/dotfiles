@@ -1,0 +1,11 @@
+- shell:
+    - description: Installing Homebrew...
+      command: test -f /home/linuxbrew/.linuxbrew/bin/brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      stdout: true
+      stderr: true
+    - grep -q brew ~/.bash_profile || echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+    - grep -q brew ~/.profile || echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+    - description: Upgrading brew packages...
+      command: /home/linuxbrew/.linuxbrew/bin/brew upgrade
+      stdout: true
+      stderr: true

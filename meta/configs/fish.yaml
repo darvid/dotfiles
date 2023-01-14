@@ -1,0 +1,4 @@
+- shell:
+    - [chsh -s $(which fish), Making fish the default shell]
+- link:
+    ~/.config/fish: .config/fish

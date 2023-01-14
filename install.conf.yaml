@@ -15,11 +15,6 @@
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.tmux.conf: tmux.conf
-    ~/.zsh_aliases: zsh_aliases
-    ~/.zsh_exports: zsh_exports
-    ~/.zshrc:
-      force: true
-      path: zshrc
     ~/bin/np.sh: np.sh
 - shell:
     - [chmod u+x ~/bin/*.sh]

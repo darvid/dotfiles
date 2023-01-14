@@ -5,6 +5,7 @@
 	delete-the-fucking-tag = !sh -c 'git tag -d $@ && git push origin :refs/tags/$@' -
 	current-tag = describe --tags --abbrev=0
 	fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+	taglist = tag --list --format '%(refname:short) %(objectname:short)'
 [color]
 	ui = true
 [color "diff-highlight"]

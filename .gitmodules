@@ -1,7 +1,10 @@
-[submodule "dotbot"]
-	path = dotbot
+[submodule "meta/dotbot"]
+	path = meta/dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
-[submodule "dotbot-brewfile"]
-	path = dotbot-brewfile
-	url = https://github.com/sobolevn/dotbot-brewfile
+[submodule "meta/dotbot-asdf"]
+	path = meta/plugins/dotbot-asdf
+	url = https://github.com/sobolevn/dotbot-asdf.git
+[submodule "meta/plugins/dotbot-apt"]
+	path = meta/plugins/dotbot-apt
+	url = https://github.com/bryant1410/dotbot-apt

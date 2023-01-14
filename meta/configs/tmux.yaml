@@ -1,0 +1,19 @@
+- shell:
+  - description: Installing tmux
+    command: |
+      /home/linuxbrew/.linuxbrew/bin/brew list tmux >/dev/null || \\
+      /home/linuxbrew/.linuxbrew/bin/brew install -f tmux
+    stdout: true
+    stderr: true
+  - description: Installing tpm
+    command: |
+      mkdir -p "~/.tmux"
+      [ ! -d ~/.tmux/plugins/tpm ] && \\
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || \\
+      echo tpm already installed
+    stdout: true
+    stderr: true
+- link:
+    ~/.tmux.conf: cui/tmux/tmux.conf
+- shell:
+    - [tmux source-file ~/.tmux.conf || true, Sourcing new tmux configuration]

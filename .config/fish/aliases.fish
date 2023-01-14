@@ -4,7 +4,7 @@ alias ea 'code ~/.config/fish/aliases.fish'
 
 alias l ls
 alias ll 'ls -la'
-alias ls lsd
+alias ls 'ls-go -i'
 
 alias av aws-vault
 alias g git

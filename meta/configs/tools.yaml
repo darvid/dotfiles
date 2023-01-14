@@ -1,0 +1,34 @@
+- shell:
+  - description: Installing brew packages
+    command: |
+      brew_packages=(
+        asdf
+        aws-sam-cli
+        aws-vault
+        awscli
+        bridgecrewio/tap/yor
+        diff-so-fancy
+        direnv
+        direnv
+        emojify
+        exa
+        expat
+        fzf
+        git-delta
+        git-fixup
+        go-task
+        jq
+        kubectx
+        kubernetes-cli
+        terraform-docs
+        tfenv
+        tflint
+      )
+      for package in "${brew_packages[@]}"
+      do
+        echo Installing ${package}...
+        /home/linuxbrew/.linuxbrew/bin/brew list "$package" >/dev/null || \\
+        /home/linuxbrew/.linuxbrew/bin/brew install "$package"
+      done
+    stdout: true
+    stderr: true

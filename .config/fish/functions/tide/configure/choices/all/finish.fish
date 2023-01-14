@@ -10,7 +10,7 @@ function finish
     switch $_tide_selected_option
         case y
             _tide_finish
-            command -q clear && clear
+            clear
     end
 end
 

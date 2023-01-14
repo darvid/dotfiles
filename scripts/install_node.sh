@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
-nvm install node
-
+. $(brew --prefix asdf)/libexec/asdf.sh
+asdf global nodejs latest
 npm install -g \
   commitizen \
   cz-emoji \

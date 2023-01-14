@@ -1,0 +1,19 @@
+- shell:
+  - description: Installing asdf
+    command: |
+      brew list asdf >/dev/null || brew install asdf
+    stdout: true
+    stderr: true
+- asdf:
+  - plugin: python
+    url: https://github.com/tuvistavie/asdf-python.git
+  - plugin: nodejs
+    url: https://github.com/asdf-vm/asdf-nodejs.git
+  - plugin: rust
+    url: https://github.com/code-lever/asdf-rust
+  - plugin: packer
+    url: https://github.com/asdf-community/asdf-hashicorp.git
+  - plugin: terraform
+    url: https://github.com/asdf-community/asdf-hashicorp.git
+  - plugin: terraform-ls
+    url: https://github.com/asdf-community/asdf-hashicorp.git

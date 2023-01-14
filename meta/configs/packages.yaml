@@ -1,0 +1,21 @@
+- apt:
+    - build-essential
+    - curl
+    - fish
+    - fontforge
+    - libbz2-dev
+    - libffi-dev
+    - liblzma-dev
+    - libncursesw5-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - libxml2-dev
+    - libxmlsec1-dev
+    - llvm
+    - python3-fontforge
+    - python3-pip
+    - tk-dev
+    - vim
+    - xz-utils
+    - zlib1g-dev

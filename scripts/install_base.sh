@@ -11,12 +11,20 @@ sudo apt -y install fish
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Install NVM
-brew install nvm
-mkdir -p "$HOME/.nvm"
-export NVM_DIR="$HOME/.nvm"
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
-nvm install node
+# Install asdf
+brew install asdf
+asdf plugin add nodejs
+asdf plugin add python
+asdf plugin add rust
+asdf plugin add packer https://github.com/asdf-community/asdf-hashicorp.git
+asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
+asdf plugin add terraform-ls https://github.com/asdf-community/asdf-hashicorp.git
+asdf install nodejs latest
+asdf install python latest
+asdf install packer latest
+asdf install terraform latest
+asdf install terraform-ls latest
+asdf install rust latest
 
 # Install Rust
 export RUSTUP_INIT_SKIP_PATH_CHECK=yes

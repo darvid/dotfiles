@@ -1,0 +1,11 @@
+version: "3"
+
+tasks:
+  install:linux:
+    cmds:
+      - ./install-profile linux
+
+  install:wsl:
+    deps: [install:linux]
+    cmds:
+      - ./install-profile wsl
