@@ -13,6 +13,7 @@
     - libxml2-dev
     - libxmlsec1-dev
     - llvm
+    - pass
     - python3-fontforge
     - python3-pip
     - tk-dev

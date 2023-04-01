@@ -1,7 +1,6 @@
 __pycache__
 ._*
 .DS_Store
-.vscode
 *.pyc
 *~
 node_modules

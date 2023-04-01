@@ -67,3 +67,13 @@ function tmux_directory_title
         tmux rename-window "$prefix$substring"
     end
 end
+
+# pnpm
+set -gx PNPM_HOME "/home/david/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
+
+# https://github.com/docker/for-win/issues/12355
+sed -id '/credsStore/d' ~/.docker/config.json
+
+set -Ux AWS_VAULT_BACKEND pass
